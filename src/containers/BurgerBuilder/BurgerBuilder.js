@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import Aux from "../../hoc/Aux";
-import Burger from "../../components/Burger/Burger";
-import BuildControls from "../../components/Burger/BuildControls/BuildControls";
-import Modal from "../../components/UI/Modal/Modal";
-import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
+import { Burger } from "../../components/Burger/Burger";
+import { BuildControls } from "../../components/Burger/BuildControls/BuildControls";
+import { OrderSummary } from "../../components/Burger/OrderSummary/OrderSummary";
+import { Modal } from '../../components/UI';
 
 const INGREDIENT_PRICES = {
   salad: 0.5,
@@ -12,12 +11,7 @@ const INGREDIENT_PRICES = {
   bacon: 0.7
 };
 
-class BurgerBuilder extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {..}
-  // }
-
+export class BurgerBuilder extends Component {
   state = {
     ingredients: {
       salad: 0,
@@ -101,10 +95,10 @@ class BurgerBuilder extends Component {
     }
 
     return (
-      <Aux>
+      <>
         <Modal
-          show={this.state.purchasing}
-          clicked={this.purchaseCancelHandler}
+          isOpen={this.state.purchasing}
+          onDismiss={this.purchaseCancelHandler}
         >
           <OrderSummary
             ingredients={this.state.ingredients}
@@ -122,9 +116,7 @@ class BurgerBuilder extends Component {
           purchaseable={this.state.purchaseable}
           ordered={this.purchaseHandler}
         />
-      </Aux>
+      </>
     );
   }
 }
-
-export default BurgerBuilder;
